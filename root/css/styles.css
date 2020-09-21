@@ -1,7 +1,7 @@
 html {
-  background-color: black;
+  /* background-color: black; */
   font-family:helvetica;
-  color: white;
+  /* color: white; */
 }
 
 #menu {
@@ -22,7 +22,7 @@ input.slider {
   appearance: none;
   width: 100%; /* Full-width */
   height: 20px; /* Specified height */
-  background: #fef9f3; /* Grey background */
+  background: #a9a9a9; /* Grey background */
   outline: none; /* Remove outline */
   /* opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */ */
   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
@@ -38,14 +38,14 @@ input.slider::-webkit-slider-thumb {
   appearance: none;
   width: 25px;
   height: 25px;
-  background: #381df5;
+  background: #000000;
   cursor: pointer;
 }
 
 input.slider::-moz-range-thumb {
   width: 25px;
   height: 25px;
-  background: #381df5;
+  background: #000000;
   outline: black;
   cursor: pointer;
 }
