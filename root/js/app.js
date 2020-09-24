@@ -4,15 +4,16 @@ let slider
 
 function setup() {
  canvas = createCanvas(1000, 1000);
+ frameRate(24);
 
 
   canvas.parent('main');
 
   p1 = createP('Slider 1');
   p1.parent('menu');
-  slider = createSlider(0, 255, 120).class('slider');
+  slider1 = createSlider(0, 255, 100).class('slider');
    // slider.position(20,130);
-  slider.parent('menu');
+  slider1.parent('menu');
 
   p2 = createP('Slider 2');
   p2.parent('menu');
@@ -34,7 +35,7 @@ function setup() {
 
   p5 = createP('Slider 5');
   p5.parent('menu');
-  slider5 = createSlider(0, 1, 1).class('slider');
+  slider5 = createSlider(0, 255, 120).class('slider');
    // slider5.position(20,250);
   slider5.parent('menu');
 
@@ -50,10 +51,6 @@ function setup() {
    button.parent('menu');
    // button.position(20, 400);
    button.mousePressed(downloadPNG);
-//   pos = 0.0;
-//   inc = 3.0
-//   pos2 = 0.0;
-  // inc2 = 7.0
 }
 
 function downloadPNG() {
@@ -66,25 +63,26 @@ function draw() {
   translate(width/2, height/2);
 
 
-for (x = 2; x <= slider4.value()*3; x = x+ 3)
-  for (y = 0; y <= 600; y = y +10) {
+for (x = 2; x <= slider1.value()*2.5; x = x+ 3)
+  for (y = 0; y <= 300; y = y +10) {
     noFill();
     beginShape();
-    strokeWeight(slider5.value()/3);
-    vertex(slider.value(), slider2.value()*2);
-    quadraticVertex(x/6, y/PI, slider3.value(), slider6.value());
+    strokeWeight(.06);
+    vertex(200, slider2.value()*1.5);
+    quadraticVertex(x/6, y/PI, slider3.value(), slider4.value());
     endShape();
     beginShape();
-    strokeWeight(.07);
-    vertex(10, 30);
-    quadraticVertex(x/PI, y/HALF_PI, 40, 20);
+    strokeWeight(.03);
+    vertex(10, slider5.value());
+    quadraticVertex(x/PI, y/HALF_PI, 30, 20);
     endShape();
     beginShape();
     strokeWeight(0.05);
-    vertex(200, 100);
-    quadraticVertex(x, y, 400, 10);
+    vertex(100, slider6.value()*1.5);
+    quadraticVertex(x, y, 300, 200);
     endShape();
     rotate(x);
+    // noLoop();
 
 }
 
