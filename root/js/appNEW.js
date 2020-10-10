@@ -8,7 +8,7 @@ lval = 0
 function setup() {
  canvas = createCanvas(1000, 1000);
  frameRate(24);
-
+ angleMode(DEGREES);
 
   canvas.parent('main');
 
@@ -48,17 +48,28 @@ function setup() {
    // slider6.position(20,280);
    slider6.parent('menu');
 
-   angleMode(DEGREES);
 
-   button = createButton('Save Image');
-   button.parent('menu');
+
+   // Buttons!
+
+   Savebutton = createButton('Save Image');
+   Savebutton.parent('menu');
+   Savebutton.addClass('Button');
    // button.position(20, 400);
-   button.mousePressed(downloadPNG);
+   Savebutton.mousePressed(downloadPNG);
 
-   button = createButton('Invert');
-   button.parent('top');
+   Stanbutton = createButton('Standard');
+   Stanbutton.addClass('Button');
+   Stanbutton.addClass('ButtonActive');
+   Stanbutton.parent('top');
    // button.position(19,19);
-   button.mousePressed(changeBG);
+   Stanbutton.mousePressed(changeBGstandard);
+
+   Invbutton = createButton('Invert');
+   Invbutton.addClass('Button');
+   Invbutton.parent('top');
+   // button.position(19,19);
+   Invbutton.mousePressed(changeBG);
 }
 
 
@@ -66,10 +77,19 @@ function downloadPNG() {
   saveCanvas();
 }
 
+function changeBGstandard() {
+  val = 255;
+  lval = 0;
+  Stanbutton.addClass('ButtonActive');
+  Invbutton.removeClass('ButtonActive');
+
+  // background(val);
+}
 function changeBG() {
   val = 0;
   lval = 255;
-
+  Invbutton.addClass('ButtonActive');
+  Stanbutton.removeClass('ButtonActive');
   // background(val);
 }
 
