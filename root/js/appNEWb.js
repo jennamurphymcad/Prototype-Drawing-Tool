@@ -19,42 +19,57 @@ function setup() {
   slider1 = createSlider(0, 255, 100).class('slider');
    // slider.position(20,130);
   slider1.parent('menu');
+  // valueDisplayer1 = createP();
+  // valueDisplayer1.parent('menu');
+
 
   p2 = createP('Slider 2');
   p2.parent('menu');
   slider2 = createSlider(0, 255, 120).class('slider');
    // slider2.position(20,160);
   slider2.parent('menu');
+  // valueDisplayer2 = createP();
+  // valueDisplayer2.parent('menu');
 
   p3 = createP('Slider 3');
   p3.parent('menu');
   slider3 = createSlider(0, 255, 120).class('slider');
    // slider3.position(20,190);
   slider3.parent('menu');
+  // valueDisplayer3 = createP();
+  // valueDisplayer3.parent('menu');
 
   p4 = createP('Slider 4');
   p4.parent('menu');
   slider4 = createSlider(0, 255, 120).class('slider');
    // slider4.position(20,220);
   slider4.parent('menu');
+  // valueDisplayer4 = createP();
+  // valueDisplayer4.parent('menu');
 
   p5 = createP('Slider 5');
   p5.parent('menu');
   slider5 = createSlider(0, 255, 120).class('slider');
    // slider5.position(20,250);
   slider5.parent('menu');
+  // valueDisplayer5 = createP();
+  // valueDisplayer5.parent('menu');
 
   p6 = createP('Slider 6');
   p6.parent('menu');
   slider6 = createSlider(0, 255, 120).class('slider');
    // slider6.position(20,280);
    slider6.parent('menu');
+   // valueDisplayer6 = createP();
+   // valueDisplayer6.parent('menu');
 
    p7 = createP('Rotate X');
    p7.parent('menu');
-   slider7 = createSlider(1, 300, 1).class('slider');
+   slider7 = createSlider(1, 20, 1).class('slider');
     // slider6.position(20,280);
     slider7.parent('menu');
+    // valueDisplayer7 = createP();
+    // valueDisplayer7.parent('menu');
 
     // p8 = createP('Rotate Y');
     // p8.parent('menu');
@@ -93,13 +108,16 @@ function setup() {
    // button.position(20, 400);
    TranButtonOn.mousePressed(translateOn);
 
-      p9 = createP('translate');
-      p9.parent('menu');
-      slider9 = createSlider(1, 6, 1).class('slider');
-      // slider6.position(20,280);
-      slider9.parent('menu');
-      p9.hide();
-      slider9.hide();
+     p9 = createP('Translate');
+     p9.parent('menu');
+     slider9 = createSlider(0, 5, tranVal).class('slider');
+     // slider6.position(20,280);
+     slider9.parent('menu');
+     // valueDisplayer9 = createP();
+     // valueDisplayer9.parent('menu');
+     p9.hide();
+     slider9.hide();
+
 
    Savebutton = createButton('Save Image');
    Savebutton.parent('menu');
@@ -111,7 +129,7 @@ function setup() {
 
 
 function downloadPNG() {
-  saveCanvas();
+  saveCanvas('img');
 }
 
 function changeBGstandard() {
@@ -141,20 +159,24 @@ function translateOff() {
 
 function translateOn() {
     // tranVal = 3;
-    tranVal = slider9.value();
+
     TranButtonOn.addClass('ButtonActive');
     TranButtonOff.removeClass('ButtonActive');
+
+
+
     p9.show();
     slider9.show();
+    tranVal = slider9.value();
 }
 
 
 
+  // tranVal = slider9.value();
 function draw() {
   clear();
   translate(width/2, height/2);
   background(val);
-
 for (x = 2; x <= slider1.value()*2.5; x = x+ 3)
   for (y = 0; y <= 300; y = y +10) {
 
@@ -177,12 +199,21 @@ for (x = 2; x <= slider1.value()*2.5; x = x+ 3)
     endShape();
     rotate(x*slider7.value()*3);
 
-    translate(tranVal, tranVal);
+    translate(slider9.value()*tranVal, slider9.value()*tranVal);
+
+    // valueDisplayer1.html('The value is '+slider1.value());
+    // valueDisplayer2.html('The value is '+slider2.value());
+    // valueDisplayer3.html('The value is '+slider3.value());
+    // valueDisplayer4.html('The value is '+slider4.value());
+    // valueDisplayer5.html('The value is '+slider5.value());
+    // valueDisplayer6.html('The value is '+slider6.value());
+    // valueDisplayer7.html('The value is '+slider7.value());
+    // // valueDisplayer8.html('The value is '+slider1.value());
+    // valueDisplayer9.html('The value is '+slider9.value());
     // rotate(y*slider8.value());
     // noLoop();
 
-}
-
+    }
   }
 
 

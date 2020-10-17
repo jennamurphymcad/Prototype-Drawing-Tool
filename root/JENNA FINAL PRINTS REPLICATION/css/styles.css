@@ -51,9 +51,6 @@ input.slider::-moz-range-thumb {
   cursor: pointer;
 }
 
-#album {
-  clear: both;
-}
 /* button style */
 
 
