@@ -5,10 +5,14 @@ let button
 val = 255
 lval = 0
 tranVal = 0
+// var albumBucketName = 'drawingtoolgallerybucket';
+// var bucketRegion = "us-east-2";
+// var IdentityPoolId = "us-east-2:3196ef8e-9de3-4f73-a386-4a2d587c10ac";
 
 function setup() {
  canvas = createCanvas(1000, 1000);
- // frameRate(24);
+ // console.log(canvas.elt);
+ frameRate(5);
  angleMode(DEGREES);
 
   canvas.parent('main');
@@ -124,13 +128,66 @@ function setup() {
    Savebutton.addClass('Button');
    // button.position(20, 400);
    Savebutton.mousePressed(downloadPNG);
+
+   Savebutton = createButton('Add to Gallery');
+   Savebutton.parent('menu');
+   Savebutton.addClass('Button');
+   // button.position(20, 400);
+   Savebutton.mousePressed(galleryRun);
+
 }
-
-
 
 function downloadPNG() {
-  saveCanvas('img');
+  saveCanvas();
 }
+
+function galleryRun() {
+  /**
+ * Start Here with the mousepressed event or some other event handler
+ */
+  canvas.elt.toBlob(
+    function (blobFile) {
+      console.log(blobFile);
+      addToAlbum(blobFile, "album1");
+    },
+    "PNG",
+    1
+  );
+}
+
+function addToAlbum(file, albumName) {
+  var albumPhotosKey = encodeURIComponent(albumName) + "/";
+  var fileName = "imageat" + Date.now() + ".png";
+  var photoKey = albumPhotosKey + fileName;
+
+  // Use S3 ManagedUpload class as it supports multipart uploads
+  var upload = new AWS.S3.ManagedUpload({
+    params: {
+      Bucket: "drawingtoolgallerybucket",
+      Key: photoKey,
+      Body: file,
+      ACL: "public-read"
+    }
+  });
+
+  var promise = upload.promise();
+
+  promise.then(
+    function (data) {
+      //alert("Successfully uploaded photo.");
+      console.log("photo loading success");
+      viewAlbum(albumName);
+    },
+    function (err) {
+      console.log("error loading photo", err.message);
+      //return alert("There was an error uploading your photo: ", err.message);
+    }
+  );
+
+}
+
+
+
 
 function changeBGstandard() {
   val = 255;
@@ -201,21 +258,21 @@ for (x = 2; x <= slider1.value()*2.5; x = x+ 3)
 
     translate(slider9.value()*tranVal, slider9.value()*tranVal);
 
-    // valueDisplayer1.html('The value is '+slider1.value());
-    // valueDisplayer2.html('The value is '+slider2.value());
-    // valueDisplayer3.html('The value is '+slider3.value());
-    // valueDisplayer4.html('The value is '+slider4.value());
-    // valueDisplayer5.html('The value is '+slider5.value());
-    // valueDisplayer6.html('The value is '+slider6.value());
-    // valueDisplayer7.html('The value is '+slider7.value());
-    // // valueDisplayer8.html('The value is '+slider1.value());
-    // valueDisplayer9.html('The value is '+slider9.value());
-    // rotate(y*slider8.value());
-    // noLoop();
 
     }
   }
 
+  // valueDisplayer1.html('The value is '+slider1.value());
+  // valueDisplayer2.html('The value is '+slider2.value());
+  // valueDisplayer3.html('The value is '+slider3.value());
+  // valueDisplayer4.html('The value is '+slider4.value());
+  // valueDisplayer5.html('The value is '+slider5.value());
+  // valueDisplayer6.html('The value is '+slider6.value());
+  // valueDisplayer7.html('The value is '+slider7.value());
+  // // valueDisplayer8.html('The value is '+slider1.value());
+  // valueDisplayer9.html('The value is '+slider9.value());
+  // rotate(y*slider8.value());
+  // noLoop();
 
 
 //  pos = pos + slider.value();

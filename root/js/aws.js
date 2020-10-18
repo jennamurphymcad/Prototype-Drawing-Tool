@@ -2,7 +2,8 @@
 //   Replace BUCKET_NAME with the bucket name.
 //
 var albumBucketName = 'drawingtoolgallerybucket';
-
+var bucketRegion = "us-east-2";
+var IdentityPoolId = "us-east-2:3196ef8e-9de3-4f73-a386-4a2d587c10ac";
 // **DO THIS**:
 //   Replace this block of code with the sample code located at:
 //   Cognito -- Manage Identity Pools -- [identity_pool_name] -- Sample Code -- JavaScript
@@ -13,15 +14,43 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({
     IdentityPoolId: 'us-east-2:3196ef8e-9de3-4f73-a386-4a2d587c10ac',
 });
 
-// Create a new service object
+//
+// AWS.config.update({
+//   region: bucketRegion,
+//   credentials: new AWS.CognitoIdentityCredentials({
+//     IdentityPoolId: IdentityPoolId
+//   })
+// });
+
 var s3 = new AWS.S3({
-  apiVersion: '2006-03-01',
-  params: {Bucket: albumBucketName}
+  apiVersion: "2006-03-01",
+  params: { Bucket: albumBucketName }
 });
+
+// // Create a new service object
+// var s3 = new AWS.S3({
+//   apiVersion: '2006-03-01',
+//   params: {Bucket: albumBucketName}
+// });
 
 // A utility function to create HTML.
 function getHtml(template) {
   return template.join('\n');
+}
+
+function getFirstAlbum(){
+  var album = false;
+    s3.listObjects({Delimiter: '/'}, function(error, data) {
+      if( error ){
+        console.log(error.message);
+        //return false;
+      } else {
+        var prefix = data.CommonPrefixes[0].Prefix;
+        album = decodeURIComponent(prefix.replace('/', ''));
+        viewAlbum(album);
+      }
+    });
+
 }
 
 // List the photo albums that exist in the bucket.
@@ -61,6 +90,8 @@ function listAlbums() {
 // Show the photos that exist in an album.
 function viewAlbum(albumName) {
   var albumPhotosKey = encodeURIComponent(albumName) + '/';
+  console.log('viewing album', albumPhotosKey);
+
   s3.listObjects({Prefix: albumPhotosKey}, function(err, data) {
     if (err) {
       return alert('There was an error viewing your album: ' + err.message);
@@ -91,26 +122,10 @@ function viewAlbum(albumName) {
       '<p>There are no photos in this album.</p>';
     var htmlTemplate = [
       '<div>',
-        '<button onclick="listAlbums()">',
-          'Back To Albums',
-        '</button>',
-      '</div>',
-      '<h2>',
-        'Album: ' + albumName,
-      '</h2>',
-      message,
-      '<div>',
         getHtml(photos),
-      '</div>',
-      '<h2>',
-        'End of Album: ' + albumName,
-      '</h2>',
-      '<div>',
-        '<button onclick="listAlbums()">',
-          'Back To Albums',
-        '</button>',
-      '</div>',
-    ]
+      '</div>'
+    ];
+
     document.getElementById('viewer').innerHTML = getHtml(htmlTemplate);
     document.getElementsByTagName('img')[0].setAttribute('style', 'display:none;');
   });

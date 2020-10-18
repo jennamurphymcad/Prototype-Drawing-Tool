@@ -12,7 +12,16 @@
 <script src="https://sdk.amazonaws.com/js/aws-sdk-2.773.0.min.js"></script>
 <script src="./PhotoViewer.js"></script>
 <script src="js/aws.js" charset="utf-8"></script>
-<script>listAlbums();</script>
+<script>
+function getHtml(template) {
+   return template.join('\n');
+}
+ listAlbums();
+//listAlbums();
+//var album = getFirstAlbum();
+getFirstAlbum();
+// listAlbums();
+//</script>
     <link rel = "stylesheet" type = "text/css" href = "css/styles.css" />
   </head>
 
