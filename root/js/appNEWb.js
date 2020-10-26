@@ -16,8 +16,8 @@ let r, g, b, r2, g2, b2, r3, g3, b3;
 
 function setup() {
 
-
- canvas = createCanvas(1000, 1000);
+canvas = createCanvas(1000, 1000);
+ // canvas = createCanvas(1000, 1000);
  // console.log(canvas.elt);
  frameRate(5);
  angleMode(DEGREES);
@@ -349,7 +349,7 @@ for (x = 2; x <= slider1.value()*2.5; x = x+ 3)
 
 
     }
-      valueDisplayer1.html('for (x = 2; x <=' + slider1.value() + ' * 2.5; x = x+ 3)');
+      valueDisplayer1.html('For (x = 2; x <=' + slider1.value() + ' * 2.5; x = x+ 3)');
 
   }
 

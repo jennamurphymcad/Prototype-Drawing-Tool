@@ -4,10 +4,16 @@ html {
   /* color: white; */
   /* padding: 0;
   margin: 0; */
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
 }
 
+
+
 div {
-  border: 1px black solid;
+  border: 1px #D3D3D3 solid;
+  padding: 5px;
 }
 
 /* div p {
@@ -22,6 +28,8 @@ div div {
 #menu {
   font-size: 11px;
   min-width: 200px;
+  max-height: 80%;
+
 }
 #menu h2 {
   font-size: 16px;
@@ -29,6 +37,9 @@ div div {
 
 #main {
   border: none;
+  max-height: 90%;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
 
@@ -135,7 +146,7 @@ input.slider::-moz-range-thumb {
   background-color: white; /* Green */
   border: 2px solid #555555;
   color: black;
-  /* padding: 16px 32px; */
+  padding: 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -143,6 +154,11 @@ input.slider::-moz-range-thumb {
   /* margin: 4px 2px; */
   /* transition-duration: 0.4s; */
   cursor: pointer;
+}
+
+button.Button {
+  margin: 0px 5px;
+  /* text-align: center; */
 }
 
  .ButtonActive {
@@ -155,13 +171,15 @@ div#save.menudiv7 button.Button {
   height: 100%;
   background-color: black;
   color: white;
-  border: 2px solid white;
+  border: none;
+  /* padding: 0px; */
 }
 
 div#save.menudiv7 button.Button:hover {
   /* width: 100%;
   height: 100%; */
   background-color: #555555;
+  /* padding: 0px; */
   /* color: black; */
   /* border: 2px solid white; */
 }
